@@ -1,0 +1,13 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>kamishivy</title>
+  <link rel="icon" href="images/icon.png">
+  <style>
+    :root {
+      --blue: #5151FF;
+      --cream: #FAFDCC;
+      --ink: #1a1a4d;
+    }
+
+メインページは作成中
