@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>kamishivy</title>
+  <link rel="icon" href="images/icon.png">
+  <style>
+    :root {
+      --blue: #5151FF;
+      --cream: #FAFDCC;
+      --ink: #1a1a4d;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+
+    /* タイトル＋動画の枠 */
+    .hero {
+      border: 6px solid var(--blue);
+      background: var(--cream);
+      padding: 20px 20px 24px;
+    }
+    .hero-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 0 18px;
+    }
+    .hero-title img {
+      width: 56px;
+      height: 56px;
+      display: block;
+    }
+    .hero-title h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .video-box {
+      background: var(--blue);
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-box video,
+    .video-box iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+      background: #2a2a88;
+    }
+    .video-placeholder {
+      color: var(--cream);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.95rem;
+    }
+    .video-placeholder code {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .downloads { margin-top: 36px; }
+    .dl-latest {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--cream);
+      background: var(--blue);
+      border: 3px solid var(--blue);
+      padding: 16px 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 1.15rem;
+    }
+    .dl-latest:hover {
+      background: var(--cream);
+      color: var(--blue);
+    }
+    .dl-latest small {
+      display: block;
+      margin-top: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      opacity: 0.9;
+    }
+    .dl-extra {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: center;
+      margin: 12px 0 0;
+    }
+    .dl-extra a {
+      color: var(--blue);
+      font-weight: 700;
+    }
+    .dl-list {
+      list-style: none;
+      margin: 16px 0 0;
+      padding: 0;
+      border: 3px solid var(--blue);
+    }
+    .dl-list li {
+      display: grid;
+      grid-template-columns: 6em 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--blue);
+    }
+    .dl-list li:last-child { border-bottom: 0; }
+    .dl-list .ver {
+      color: var(--blue);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+    .dl-list .files a { margin-right: 14px; color: var(--blue); font-weight: 700; }
+    @media (max-width: 560px) {
+      .dl-list li { grid-template-columns: 1fr; gap: 2px; }
+    }
+
+    section { margin-top: 36px; }
+    h2 {
+      margin: 0 0 12px;
+      color: var(--blue);
+      font-size: 1.35rem;
+      letter-spacing: 0.06em;
+      border-bottom: 3px solid var(--blue);
+      padding-bottom: 4px;
+      display: inline-block;
+    }
+
+    .news-list {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+      border: 3px solid var(--blue);
+    }
+    .news-list li {
+      display: grid;
+      grid-template-columns: 7.5em 1fr;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--blue);
+    }
+    .news-list li:last-child { border-bottom: 0; }
+    .news-list time {
+      color: var(--blue);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .about p { margin: 10px 0 0; }
+
+    .nav-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 560px) {
+      .nav-links { grid-template-columns: 1fr; }
+      .news-list li { grid-template-columns: 1fr; gap: 2px; }
+    }
+    .nav-links a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--cream);
+      background: var(--blue);
+      border: 3px solid var(--blue);
+      padding: 14px 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    .nav-links a:hover {
+      background: var(--cream);
+      color: var(--blue);
+    }
+
+    .topics { display: grid; gap: 18px; }
+    .topic {
+      border: 3px solid var(--blue);
+      padding: 16px;
+      background: var(--cream);
+    }
+    .topic h3 {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 1.15rem;
+    }
+    .topic img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 0 10px;
+      border: 2px solid var(--blue);
+    }
+    .image-placeholder {
+      border: 2px dashed var(--blue);
+      color: var(--blue);
+      text-align: center;
+      padding: 36px 12px;
+      margin: 0 0 10px;
+      font-size: 0.9rem;
+    }
+    .image-placeholder code { display: block; margin-top: 6px; }
+    .topic p { margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ========== 1. タイトル＋プロモーション動画（同じ枠の中） ========== -->
+    <div class="hero">
+      <div class="hero-title">
+        <img src="images/icon.png" alt="">
+        <h1>kamishivy</h1>
+      </div>
+      <div class="video-box">
+        <iframe
+          src="https://www.youtube.com/embed/tt_JXKwwavo"
+          title="kamishivy プロモーション"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+        <!--
+        <video controls poster="images/promo-poster.png">
+          <source src="videos/promo.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+    </div>
+
+    <!-- ========== ダウンロード（新しい版は「最新」を書き換え、古い版はリストへ足す） ========== -->
+    <section class="downloads">
+      <h2>ダウンロード</h2>
+      <!-- ▼ 最新版：版番号と href を新しい zip / exe に差し替えてください -->
+      <a class="dl-latest" href="https://github.com/meatprox/kamishivy/releases/download/ver1.0.0/kamishiby_ver1.0.0.zip">
+        最新版をダウンロード
+        <small>kamishivy 1.0.0</small>
+      </a>
+      <div class="dl-extra">
+        <!-- ▼ ソースやライセンスのパスを差し替えてください -->
+        <a href="https://github.com/meatprox/kamishivy/archive/refs/tags/ver1.0.0.zip">ソース 1.0.0</a>
+        <a href="https://github.com/meatprox/kamishivy/blob/main/LICENSE">ライセンス（MIT）</a>
+        <a href="https://github.com/meatprox/kamishivy/blob/main/README.md">README（MIT）</a>
+      </div>
+      <ul class="dl-list">
+        <!--
+          ▼ 新しい版を出したら、上の「最新版」を新しい番号に変え、
+            その下に古い版の行をコピーして残してください。
+        -->
+        <li>
+          <span class="ver">1.0.0</span>
+          <span class="files">
+            <a href="https://github.com/meatprox/kamishivy/releases/download/ver1.0.0/kamishiby_ver1.0.0.zip">exe</a>
+            <a href="https://github.com/meatprox/kamishivy/archive/refs/tags/ver1.0.0.zip">ソース</a>
+          </span>
+        </li>
+        <!--
+        <li>
+          <span class="ver">0.9.0</span>
+          <span class="files">
+            <a href="files/kamishivy-0.9.0.zip">exe</a>
+            <a href="files/kamishivy-0.9.0-src.zip">ソース</a>
+          </span>
+        </li>
+        -->
+      </ul>
+    </section>
+
+    <!-- ========== 2. News ========== -->
+    <section>
+      <h2>News</h2>
+      <ul class="news-list">
+        <li>
+          <time datetime="2026-10-12">2026-10-12</time>
+          <span>kamishivy 1.0.0 を公開しました。</span>
+        </li>
+
+<!--
+        <li>
+          <time datetime="YYYY-MM-DD">YYYY-MM-DD</time>
+          <span>ここにニュース本文を書きます。</span>
+        </li>
+-->
+
+      </ul>
+    </section>
+
+    <!-- ========== 3. 説明文 ========== -->
+    <section class="about">
+      <h2>kamishivy について</h2>
+      <p>
+        kamishivy は、入力のできるUIを指定した紙芝居のように順番に表示していく Windows 向けのアプリです。<br>
+	入力や記録のできる機能を持ったパワーポイントのようなアプリを目指しています。<br>
+<br>
+	フリーソフトです。<br>
+	下記にライセンスのリンクがありますので、団体、企業等でお使いになる場合はそちらを提出してください。<br>
+	権利上の観点からは自由に使えるはずです。<br>
+	ライセンスはMITです。<br>
+<br>
+        UIはいくつかアセットが用意してあります。<br>
+	CUIと呼ばれるエクセルファイルに設定を打ち込むことで自由にカスタマイズ可能です。<br>
+	　（csvも対応していますが、設定を書き込むのがかなりめんどくさいです）<br>
+<br>
+	UI自体はpythonで作成することも可能です。<br>
+	pythonってなんだ？って人も、簡単な機能のUIなら、AI用の説明書を入れてAIにお願いすればUIを作ってくれます。(数回手直しすれば使えることが多いです）<br>
+<br>
+	作ったUIはパソコンにpythonがインストールしてなくてもUIフォルダに放り込めば使えます。<br>
+	　（難しいUI、つまり特殊なライブラリが必要なものはNGです。また、exe版はバーコードとmpeg4に対応していません）<br>
+      </p>
+      <p>
+      </p>
+    </section>
+
+    <!-- ========== 4. ページへのリンク ========== -->
+    <section>
+      <h2>メニュー</h2>
+      <nav class="nav-links">
+        <a href="kousei.htm"><!-- 基本的な構成 -->基本的な構成/作成中</a>
+        <a href="tsukaikata.htm"><!-- 使い方 -->使い方/作成中</a>
+        <a href="https://github.com/meatprox/kamishivy"><!-- GITHUB -->ＧＩＴＨＵＢ</a>
+        <a href="index.htm"><!-- メインページ（このページ） -->メインページ/作成中</a>
+      </nav>
+    </section>
+
+    <!-- ========== 5. トピック欄（文字・画像） ========== -->
+    <section>
+      <h2>トピック</h2>
+      <div class="topics">
+
+
+        <article class="topic">
+          <h3>今後の予定</h3>
+          <time datetime="2026-10-12">2026-10-12</time>
+          <p>
+          まだちょっとバグあります。<br>
+          ボタンの枠ぶちの色が反映されないようです。<br>
+          また、表示のカスタマイズについてかゆいところに手が届かないので改善予定です。<br>
+          UIについては随時追加予定です。
+	　</p>
+        </article>
+
+
+
+
+<!--
+
+        <article class="topic">
+          <h3>トピックの見出し</h3>
+          <!--
+            ▼ 画像を置く場所の例: images/topic-1.png
+            置いたら下の img のコメントを外し、placeholder を削除してください。
+          -->
+          <div class="image-placeholder">
+            画像
+            <code>src = images/topic-1.png</code>
+          </div>
+          <!--
+          <img src="images/topic-1.png" alt="トピック1の画像">
+          -->
+          <p>ここに本文を書きます。画像の下に文字が続きます。</p>
+        </article>
+
+        <article class="topic">
+          <h3>トピックの見出し（画像なしの例）</h3>
+          <p>画像を使わないときは、img タグを置かず、この段落だけにします。</p>
+        </article>
+-->
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
