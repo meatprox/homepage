@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>基本的な構成 - kamishivy</title>
+  <link rel="icon" href="images/icon.png">
+  <style>
+    :root {
+      --blue: #5151FF;
+      --cream: #FAFDCC;
+      --ink: #1a1a4d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+    .page-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 0 28px;
+    }
+    .page-title img { width: 40px; height: 40px; display: block; }
+    h1 {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      letter-spacing: 0.04em;
+    }
+    h2 {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 1.2rem;
+      border-bottom: 3px solid var(--blue);
+      padding-bottom: 4px;
+      display: inline-block;
+    }
+    .overview {
+      border: 3px solid var(--blue);
+      padding: 8px 0;
+      margin: 0 0 36px;
+    }
+    .overview ol {
+      margin: 0;
+      padding: 0 20px 0 44px;
+    }
+    .overview li { padding: 8px 8px 8px 0; }
+    .overview li + li { border-top: 1px solid var(--blue); }
+    .flow {
+      margin: 0 0 36px;
+    }
+    .flow p { margin: 8px 0 0; }
+    .block {
+      margin: 0 0 28px;
+      border: 3px solid var(--blue);
+      padding: 16px;
+    }
+    .block h2 { display: block; }
+    .block p { margin: 8px 0 0; }
+    .block img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 12px 0 6px;
+      border: 2px solid var(--blue);
+    }
+    .block .caption {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #7a7aa8;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .image-placeholder {
+      border: 2px dashed var(--blue);
+      color: var(--blue);
+      text-align: center;
+      padding: 36px 12px;
+      margin: 12px 0;
+      font-size: 0.9rem;
+    }
+    .image-placeholder code { display: block; margin-top: 6px; }
+    .back {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--cream);
+      background: var(--blue);
+      border: 3px solid var(--blue);
+      padding: 14px 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: 12px;
+    }
+    .back:hover {
+      background: var(--cream);
+      color: var(--blue);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="page-title">
+      <img src="images/icon.png" alt="">
+      <h1>基本的な構成</h1>
+    </div>
+
+    <p>kamishivy は、次の4つで動きます。</p>
+    <div class="overview">
+      <ol>
+        <li><strong>プログラム</strong> … UIの表示・デザイン・次へボタン・通信などを行う本体。</li>
+        <li><strong>UI</strong> … プログラムが表示する画面(UI)。UIフォルダ内に格納されています。作ることも可能です。</li>
+        <li><strong>CUI</strong> … UIを表示する順番やUIに表示する文字を収めた Excel(CSV)です。エクセル上で書き換えられます。</li>
+        <li><strong>log</strong> … 入力や判定を残す記録です。</li>
+      </ol>
+    </div>
+
+    <section class="flow">
+      <h2>動作の仕組み</h2>
+      <p>
+        プログラムが EXCEL(CUI) に書かれた UI を上から順に読み込んで表示します。UIには、文章を出すもの、チェックするもの、数値や文字を入れるもの、通信の値を表示するものなどを準備してあります。自分で作成することも可能です。
+      </p>
+      <p>
+        各 UI は Excel（CUI）の内容を読んでいるので、Excel を編集するだけで表示内容を変えられます。
+      </p>
+      <p>
+        プログラム動作中のUIに打ち込んだ数字やボタンを押した時間などはlog として残ります。
+      </p>
+      <p>
+        見た目は、プログラムのメニュー「表示のカスタマイズ」から変えられます。
+      </p>
+    </section> 
+
+    <article class="block">
+      <h2>1. プログラム</h2>
+      <p>
+        アプリの本体です。UIを表示し、「次へ」を押すことで次の UI を表示します。通信・記録・デザインも担当します。
+        配布版では exe が該当します。対応するソースコードとしては main.py だけではなく app 内のコードが含まれます。
+      </p>
+      <img src="prog.png" alt="プログラム">
+      <p class="caption">UI を表示しないとこんな感じ。画面のデザインも設定できます。(画面はデザイン済みの画面です)</p>
+    </article>
+
+    <article class="block">
+      <h2>2. UI</h2>
+      <p>
+        ウィンドウの中央に表示する画面のことです。文字を表示することのできる UI もありますし、計算機の UI もあります。
+      </p>
+      <p>
+        特定の条件を満たすまで「次へ」を押せなくすることも可能です。
+      </p>
+      <img src="ui.png" alt="UI">
+      <p class="caption">新しく表示された真ん中部分が UI。画像は数値入力用のUI。</p>
+    </article>
+
+    <article class="block">
+      <h2>3. CUI</h2>
+      <p>
+        どの画面を、どの順で、どんな文字を表示するかなどを書いた表です。基本は Excel（<code>cui.xlsx</code>）。CSV でも読めます。
+        1列目が UI 名、その右隣がタイトル、次の行から引数です。
+      </p>
+      <img src="cui.png" alt="CUI">
+      <p class="caption">CUI の中身。UI の順番(A列)と表示する内容(B列以降)が書かれている。</p>
+    </article>
+
+    <article class="block">
+      <h2>4. log</h2>
+      <p>
+        各画面の入力や判定を CSV に残します。保存先は設定で変えられます。
+        終了時にも、その時点までの記録を書き出します。
+      </p>
+      <img src="log.png" alt="log">
+      <p class="caption">入力やボタンを押した時刻などの全記録です。読みにくいので読み取り機能の充実など考えていきます。</p>
+      </p>
+
+    <a class="back" href="kamishivy_index.htm">戻る</a>
+  </div>
+</body>
+</html>
