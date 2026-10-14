@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>使い方 - kamishivy</title>
+  <link rel="icon" href="images/icon.png">
+  <style>
+    :root {
+      --blue: #5151FF;
+      --cream: #FAFDCC;
+      --ink: #1a1a4d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+    .page-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 0 28px;
+    }
+    .page-title img { width: 40px; height: 40px; display: block; }
+    h1 {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      letter-spacing: 0.04em;
+    }
+    h2 {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 1.2rem;
+      border-bottom: 3px solid var(--blue);
+      padding-bottom: 4px;
+      display: inline-block;
+    }
+    section { margin-bottom: 36px; }
+    p { margin: 8px 0 0; }
+    .video-box {
+      background: var(--blue);
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 6px solid var(--blue);
+    }
+    .video-box iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+    }
+    .video-placeholder {
+      color: var(--cream);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.95rem;
+    }
+    .video-placeholder code { display: block; margin-top: 8px; font-size: 0.85rem; opacity: 0.9; }
+    .block {
+      margin: 0 0 16px;
+      border: 3px solid var(--blue);
+      padding: 16px;
+    }
+    .block h2 { display: block; }
+    .block img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 12px 0 6px;
+      border: 2px solid var(--blue);
+    }
+    .caption {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #7a7aa8;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .points {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+    }
+    .points li {
+      padding: 8px 0;
+      border-top: 1px solid var(--blue);
+    }
+    .points li:first-child { border-top: 0; padding-top: 0; }
+    .menu-list {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+    }
+    .menu-list li {
+      padding: 8px 0;
+      border-top: 1px solid var(--blue);
+    }
+    .menu-list li:first-child { border-top: 0; padding-top: 0; }
+    .ui-link, .back {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--cream);
+      background: var(--blue);
+      border: 3px solid var(--blue);
+      padding: 14px 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+    }
+    .ui-link:hover, .back:hover {
+      background: var(--cream);
+      color: var(--blue);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="page-title">
+      <img src="images/icon.png" alt="">
+      <h1>使い方</h1>
+    </div>
+
+    <div class="video-box">
+      <iframe
+        src="https://www.youtube.com/embed/znyJNYJEC7M"
+        title="kamishivy 使い方"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+
+    <section>
+      <h2>CUI の書き方</h2>
+      <p>
+        画面の順番と、そこに出す文字は Excel（CUI）に書きます。<code>cui.xlsx</code> が基本です。CSV でも読めます。
+        プログラムは上から順に読み、1列目の名前の UI を表示します。
+      </p>
+      <div class="block">
+        <img src="tukaikata-cui.png" alt="CUI の例">
+        <p class="caption">CUI の表。A列が UI、B列がタイトル、その下が変数です。</p>
+        <ul class="points">
+          <li><strong>UI の表示列（A列）</strong> … 呼び出す画面の名前です。<code>check</code> と書けば <code>ui/check.py</code> が出ます。同じ名前が再登場したら、新しい起動です。</li>
+          <li><strong>タイトル（B列）</strong> … UI 名の右隣です。画面の先頭に出ます。空なら出しません。</li>
+          <li><strong>変数の置き場</strong> … UI 名の次の行からです。その行の A 列は空けます。B 列以降に、表示する文字や目標値などを書きます。</li>
+          <li><strong>＃について</strong> … A 列が <code>#</code>・<code>＃</code>・<code>♯</code> で始まる行はコメント／見出しで、画面には渡りません。UI 名の直後の <code>♯</code> 行は、変数の見出しです。</li>
+        </ul>
+      </div>
+      <p>空行や右端の空マスは読み飛ばします。見やすく隙間を空けて書いて大丈夫です。</p>
+    </section>
+
+    <section>
+      <h2>UI について</h2>
+      <p>用意してある画面の種類や、自分で足す方法は別ページです。</p>
+      <a class="ui-link" href="ui_setsumei.htm">UI の説明へ</a>
+    </section>
+
+    <section>
+      <h2>メニュー</h2>
+      <p>窓の右上の「メニュー」から開けます。見た目の色は、メニューから開く窓には使いません。</p>
+      <div class="block">
+        <img src="tukaikata-menu.png" alt="メニュー">
+        <p class="caption">右上のメニュー。</p>
+        <ul class="menu-list">
+          <li><strong>通信</strong> … 使う COM ポートや速度、文字コードを決めます。接続ランプに出るポートもここです。データを垂れ流すタイプのCOM通信にのみ対応です。</li>
+          <li><strong>通信データの加工</strong> … 受信した文字の切り方（そのまま／一部／カンマ区切り）と、文字か数値かを番号ごとに決めます。</li>
+          <li><strong>表示のカスタマイズ</strong> … 色・フォント・次へボタンの大きさなどデザインを改修できます。文字がはみ出る際は調整してください。メニューバー：上の細いところ。表示域：真ん中の広い部分。フッター：次へボタンのあるところ。</li>
+          <li><strong>設定</strong> … 読み込む CUI、ログの保存先、次へ音、戻るを使うか、メニューの次へでコメントを書くか、などです。</li>
+          <li><strong>次へ</strong> … 条件を満たしていなくても先に進めます。コメント設定がオンなら、コメントを残せます。一番下の「次へ」とは別でエスケープ用です。</li>
+          <li><strong>記録確認</strong> … log を見れます。</li>
+          <li><strong>戻る</strong> … ひとつ前の画面に戻ります。設定で使えなくできます。</li>
+          <li><strong>UI一覧</strong> … CUIに登録したUIのリストです。</li>
+          <li><strong>終了</strong> … アプリを閉じます。このときまでの記録を log に書きます。</li>
+        </ul>
+      </div>
+      <p>一番下の「次へ」は、 UI の設定する条件を満たしたときだけ押せます。(UI が)</p>
+    </section>
+
+    <a class="back" href="kamishivy_index.htm">戻る</a>
+  </div>
+</body>
+</html>
