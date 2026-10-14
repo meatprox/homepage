@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>各UIの説明（1.0.0） - kamishivy</title>
+  <link rel="icon" href="images/icon.png">
+  <style>
+    :root {
+      --blue: #5151FF;
+      --cream: #FAFDCC;
+      --ink: #1a1a4d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+    .page-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 0 12px;
+    }
+    .page-title img { width: 40px; height: 40px; display: block; }
+    h1 {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      letter-spacing: 0.04em;
+    }
+    .ver {
+      text-align: center;
+      color: #7a7aa8;
+      font-size: 0.9rem;
+      margin: 0 0 24px;
+    }
+    h2 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 1.2rem;
+      border-bottom: 3px solid var(--blue);
+      padding-bottom: 4px;
+    }
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 32px;
+    }
+    .toc a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid var(--blue);
+      padding: 4px 10px;
+    }
+    .toc a:hover { background: var(--blue); color: var(--cream); }
+    .block {
+      margin: 0 0 22px;
+      border: 3px solid var(--blue);
+      padding: 14px 16px;
+    }
+    .block p { margin: 6px 0 0; }
+    .block p:first-of-type { margin-top: 0; }
+    .label { color: var(--blue); font-weight: 700; }
+    .cui {
+      --cell-min: 25ch;
+      width: auto;
+      border-collapse: collapse;
+      margin: 10px 0 0;
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+    .cui th, .cui td {
+      border: 1px solid var(--blue);
+      padding: 2px 6px;
+      text-align: left;
+      vertical-align: middle;
+      white-space: nowrap;
+      min-width: var(--cell-min);
+    }
+    .cui th {
+      background: var(--blue);
+      color: var(--cream);
+      font-weight: 700;
+      text-align: center;
+    }
+    .cui td { background: #fffef0; }
+    .cui .empty { color: #bbb; }
+    .cui .ui-name { background: #cfcfff; font-weight: 700; }
+    .cui .ui-title { background: #e4e4ff; font-weight: 700; }
+    .cui .ui-body { background: #fff4a8; font-weight: 700; }
+    .legend {
+      margin: 10px 0 0;
+      font-size: 0.85rem;
+    }
+    .legend span {
+      display: inline-block;
+      border: 1px solid var(--blue);
+      padding: 0 6px;
+      margin: 0 10px 4px 0;
+    }
+    .legend .ui-name { background: #cfcfff; }
+    .legend .ui-title { background: #e4e4ff; }
+    .legend .ui-body { background: #fff4a8; }
+    .back {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--cream);
+      background: var(--blue);
+      border: 3px solid var(--blue);
+      padding: 14px 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: 12px;
+    }
+    .back:hover { background: var(--cream); color: var(--blue); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="page-title">
+      <img src="images/icon.png" alt="">
+      <h1>各UIの説明</h1>
+    </div>
+    <p class="ver">kamishivy 1.0.0 向けです。版が変わったら別ページにします。</p>
+
+    <article class="block">
+      <h2>CUI の基本構成</h2>
+      <p>Excel（CUI）は、どの UI を出すか、画面の先頭に何を出すか、その UI に何を渡すかを書く表です。マスの役割は次のとおりです。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th></tr>
+        <tr>
+          <td class="ui-name">UI名</td>
+          <td class="ui-title">タイトル</td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td class="empty"></td>
+          <td class="ui-body">内容</td>
+          <td class="ui-body">内容</td>
+        </tr>
+        <tr>
+          <td class="empty"></td>
+          <td class="ui-body">内容</td>
+          <td class="ui-body">内容</td>
+        </tr>
+      </table>
+      <p class="legend">
+        <span class="ui-name">UI名</span>
+        <span class="ui-title">タイトル</span>
+        <span class="ui-body">内容</span>
+      </p>
+      <p><span class="label">UI名</span> … 1行目の A 列です。<code>check</code> と書けば <code>ui/check.py</code> が出ます。同じ名前が再登場したら、新しい起動です。</p>
+      <p><span class="label">タイトル</span> … 1行目の B 列（UI名の右隣）です。画面の先頭に出ます。空なら出しません。</p>
+      <p><span class="label">内容</span> … UI名の次の行からです。その行の A 列は空け、B 列以降に本文・項目・目標値などを書きます。列や行を足すと内容が増える UI があります。</p>
+      <p>A 列が <code>#</code>・<code>＃</code>・<code>♯</code> で始まる行はコメント／見出しで、画面には渡りません。空行や右端の空マスは読み飛ばします。</p>
+    </article>
+
+    <nav class="toc">
+      <a href="#cuikakunin">cuikakunin</a>
+      <a href="#text">text</a>
+      <a href="#kakunin">kakunin</a>
+      <a href="#check">check</a>
+      <a href="#keikoku">keikoku</a>
+      <a href="#nyuuryoku">nyuuryoku</a>
+      <a href="#quiz">quiz</a>
+      <a href="#illust">illust</a>
+      <a href="#media">media</a>
+      <a href="#suuchi">suuchi</a>
+      <a href="#suuchihyou">suuchihyou</a>
+      <a href="#timer">timer</a>
+      <a href="#countup">countup</a>
+      <a href="#hyouji">hyouji</a>
+      <a href="#keiryou">keiryou</a>
+      <a href="#tounyuu">tounyuu</a>
+      <a href="#tounyuuhyou">tounyuuhyou</a>
+      <a href="#keisokuhyou">keisokuhyou</a>
+      <a href="#logger">logger</a>
+      <a href="#touchpoint">touchpoint</a>
+      <a href="#end">end</a>
+      <a href="#kuuhaku">kuuhaku</a>
+    </nav>
+
+    <article class="block" id="cuikakunin">
+      <h2>cuikakunin</h2>
+      <p><span class="label">基本機能</span> … 今開いている CUI のファイル名と更新日時を出します。タイトルは出しません。</p>
+      <p><span class="label">次へ</span> … 「確認しました」にチェックする。</p>
+      <p><span class="label">CUI</span> … マスは使いません。2列目は空にします。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>cuikakunin</td><td class="empty"></td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="text">
+      <h2>text</h2>
+      <p><span class="label">基本機能</span> … CUI のマスを本文として出します。上詰め・左揃えで、表示域の幅で折り返します。</p>
+      <p><span class="label">次へ</span> … 最初から押せます。</p>
+      <p><span class="label">CUI</span> … 行を足すと本文が増えます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>text</td><td>案内</td></tr>
+        <tr><td class="empty"></td><td>これは案内です。</td></tr>
+        <tr><td class="empty"></td><td>次へで進みます。</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="kakunin">
+      <h2>kakunin</h2>
+      <p><span class="label">基本機能</span> … タイトルに書いた確認内容を出し、「確認しました」のチェックを付けます。</p>
+      <p><span class="label">次へ</span> … チェックする。</p>
+      <p><span class="label">CUI</span> … 確認内容はタイトル位置に書きます。下のマスは使いません。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>kakunin</td><td>保護メガネを着用した</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="check">
+      <h2>check</h2>
+      <p><span class="label">基本機能</span> … チェック項目を並べます。</p>
+      <p><span class="label">次へ</span> … すべてチェックする。</p>
+      <p><span class="label">CUI</span> … 次の行以降のマスが項目です。行を足すと増えます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>check</td><td>点検</td></tr>
+        <tr><td class="empty"></td><td>電源が入っている</td></tr>
+        <tr><td class="empty"></td><td>周囲に危険物がない</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="keikoku">
+      <h2>keikoku</h2>
+      <p><span class="label">基本機能</span> … 警告文を中央に赤字で点滅します。下に「確認しました」のチェックがでます。</p>
+      <p><span class="label">次へ</span> … チェックする。</p>
+      <p><span class="label">CUI</span> … 次の行以降のマスが本文です。行を足すと文が増えます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>keikoku</td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>高温注意。触れないでください。</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="nyuuryoku">
+      <h2>nyuuryoku</h2>
+      <p><span class="label">基本機能</span> … 文字を入力します。</p>
+      <p><span class="label">次へ</span> … 何か文字を入れる。</p>
+      <p><span class="label">CUI</span> … タイトル（2列目）が案内です。空なら「入力してください」になります。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>nyuuryoku</td><td>氏名を入力してください</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="quiz">
+      <h2>quiz</h2>
+      <p><span class="label">基本機能</span> … 設問とラジオの選択肢を出します。行を足すと設問が増えます。</p>
+      <p><span class="label">次へ</span> … すべて正解する。</p>
+      <p><span class="label">CUI</span> … 各行は 設問、正解の番号（1始まり）、選択肢… です。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+        <tr><td>quiz</td><td>確認テスト</td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>これはテストですか</td><td>1</td><td>はい</td><td>いいえ</td></tr>
+        <tr><td class="empty"></td><td>2足す3は</td><td>2</td><td>4</td><td>5</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="illust">
+      <h2>illust</h2>
+      <p><span class="label">基本機能</span> … 画像の下に本文を出します。</p>
+      <p><span class="label">次へ</span> … 最初から押せます。</p>
+      <p><span class="label">CUI</span> … 画像パスの隣のマスが本文です。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th></tr>
+        <tr><td>illust</td><td>図の説明</td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>dummy/test.png</td><td>画像の下にこの文が出ます。</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="media">
+      <h2>media</h2>
+      <p><span class="label">基本機能</span> … 画像や動画を出します。マスや行を足すと枚数が増えます。(exe 版では mpeg4 等使えないフォーマットがあります)</p>
+      <p><span class="label">次へ</span> … 最初から押せます。</p>
+      <p><span class="label">CUI</span> … 画像または動画のパスです。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>media</td><td>メディア</td></tr>
+        <tr><td class="empty"></td><td>dummy/test.png</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="suuchi">
+      <h2>suuchi</h2>
+      <p><span class="label">基本機能</span> … 数値を入力します。キーパッドは最初から左に出ます。</p>
+      <p><span class="label">次へ</span> … 目標があるときは範囲内。目標がなければ、数値を入れた時点。</p>
+      <p><span class="label">CUI</span> … 1つ目が目標値、2つ目が許容幅です。無くても動きます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th></tr>
+        <tr><td>suuchi</td><td>数値入力</td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>100</td><td>5</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="suuchihyou">
+      <h2>suuchihyou</h2>
+      <p><span class="label">基本機能</span> … 数値入力の表です。いくつも数値を入力できます。キーパッドは最初から左に出ます。目標・許容がどの行にもないときは、その列の見出しも出しません。</p>
+      <p><span class="label">次へ</span> … 目標がある行は範囲内、無い行は数値が入っている。全行満たす。</p>
+      <p><span class="label">CUI</span> … 各行は 項目名、目標値、許容値。行を足すと表が増えます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+        <tr><td>suuchihyou</td><td>数値表</td><td class="empty"></td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>長さ</td><td>100</td><td>2</td></tr>
+        <tr><td class="empty"></td><td>重量</td><td>50</td><td>1</td></tr>
+        <tr><td class="empty"></td><td>個数</td><td class="empty"></td><td class="empty"></td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="timer">
+      <h2>timer</h2>
+      <p><span class="label">基本機能</span> … 残り時間を数えます。</p>
+      <p><span class="label">次へ</span> … 時間が0になる。</p>
+      <p><span class="label">CUI</span> … 秒、または <code>1:30</code> 形式。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>timer</td><td>待ち時間</td></tr>
+        <tr><td class="empty"></td><td>3</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="countup">
+      <h2>countup</h2>
+      <p><span class="label">基本機能</span> … 経過時間を数えます。「停止」で止めます。制限を超えると赤字になります。</p>
+      <p><span class="label">次へ</span> … 停止を押す。</p>
+      <p><span class="label">CUI</span> … 制限時間（秒）。無くても動きます（制限なし）。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>countup</td><td>経過時間</td></tr>
+        <tr><td class="empty"></td><td>10</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="hyouji">
+      <h2>hyouji</h2>
+      <p><span class="label">基本機能</span> … 通信の１番に流れているデータを表示します。COMの設定はアプリのメニュー内からできます。データ垂れ流しタイプにのみ対応しています。</p>
+      <p><span class="label">次へ</span> … 登録を一度でも押す。</p>
+      <p><span class="label">CUI</span> … 二行目以降は使いません。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>hyouji</td><td>受信の表示</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="keiryou">
+      <h2>keiryou</h2>
+      <p><span class="label">基本機能</span> … 通信の１番のデータを表示し、登録で記録します。COMの設定はアプリのメニュー内からできます。データ垂れ流しタイプにのみ対応しています。</p>
+      <p><span class="label">次へ</span> … 目標があるときは登録値が範囲内。無いときは登録した時点。</p>
+      <p><span class="label">CUI</span> … 1つ目が目標値、2つ目が許容幅。無くても動きます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th></tr>
+        <tr><td>keiryou</td><td>計量</td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>100</td><td>5</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="tounyuu">
+      <h2>tounyuu</h2>
+      <p><span class="label">基本機能</span> … 投入です。1回目の登録が全体重量、2回目が風袋。投入値＝全体重量−風袋。通信の１番のデータを使います。</p>
+      <p><span class="label">次へ</span> … 目標があるときは投入値が範囲内。無いときは両方登録した時点。</p>
+      <p><span class="label">CUI</span> … 1つ目が目標値、2つ目が許容幅。無ければその見出しも出しません。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th></tr>
+        <tr><td>tounyuu</td><td>投入</td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>100</td><td>5</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="tounyuuhyou">
+      <h2>tounyuuhyou</h2>
+      <p><span class="label">基本機能</span> … 投入の繰り返しです。行は全体重量・風袋・投入値・累計。目標があるときは下に残り（目標−累計）を出します。通信の１番のデータを使います。</p>
+      <p><span class="label">次へ</span> … 目標があるときは累計が目標の範囲内になった時。目標が無いときは1行でも揃った時点。</p>
+      <p><span class="label">CUI</span> … 1つ目が目標、2つ目が許容幅。CUI の行では表は増えません。画面で登録すると増えます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th></tr>
+        <tr><td>tounyuuhyou</td><td>投入表</td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>200</td><td>10</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="keisokuhyou">
+      <h2>keisokuhyou</h2>
+      <p><span class="label">基本機能</span> … 通信の値と登録ボタンの下に表があります。登録のたびに上の行から埋まります。目標があるときは下に残りを出します。通信の１番のデータを使います。。</p>
+      <p><span class="label">次へ</span> … 全行が条件を満たす（目標がある行は範囲内に入っている場合、無い行は値が入っていれば）。</p>
+      <p><span class="label">CUI</span> … 各行は 項目名、目標値、許容値。行を足すと表が増えます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+        <tr><td>keisokuhyou</td><td>計測表</td><td class="empty"></td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>1回目</td><td>50</td><td>2</td></tr>
+        <tr><td class="empty"></td><td>2回目</td><td>50</td><td>2</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="logger">
+      <h2>logger</h2>
+      <p><span class="label">基本機能</span> … データロガーへコマンドを送り、生の返り値を読みます。送る内容はプログラムの先頭行に書き込む必要があります。(メモ帳などで編集してください)。 <code>ui/logger.py</code> 先頭の <code>COMMAND</code> / <code>DELIMITER</code> / <code>END</code> / <code>ACK</code> です。通信の番号は <code>DATA</code> です。</p>
+      <p><span class="label">次へ</span> … 読み込めた。</p>
+      <p><span class="label">CUI</span> … マスは使いません。コマンドはファイル先頭を直します。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>logger</td><td>ロガー</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="touchpoint">
+      <h2>touchpoint</h2>
+      <p><span class="label">基本機能</span> … 画像の指定した位置をタッチします。座標は位置。（画像の％ 左上が 0,0、右下が 100,100）です。</p>
+      <p><span class="label">次へ</span> … 画像上の設定した点をすべてタッチする。</p>
+      <p><span class="label">CUI</span> … 画像パスのあと、x, y, 半径 を繰り返します。半径を省略すると 4 です。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr>
+        <tr><td>touchpoint</td><td>画面をタッチしてください</td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
+        <tr><td class="empty"></td><td>dummy/test.png</td><td>25</td><td>40</td><td>5</td><td>70</td><td>65</td><td>5</td></tr>
+      </table>
+    </article>
+
+    <article class="block" id="end">
+      <h2>end</h2>
+      <p><span class="label">基本機能</span> … 本文を中央に出します。</p>
+      <p><span class="label">次へ</span> … 最初から押せます。</p>
+      <p><span class="label">CUI</span> … マスが本文です。行を足すと増えます。</p>
+      <table class="cui">
+        <tr><th>A</th><th>B</th></tr>
+        <tr><td>end</td><td>終了</td></tr>
+        <tr><td class="empty"></td><td>作業を終わります。</td></tr>
+      </table>
+    </article>
+
+    <a class="back" href="tsukaikata.htm">戻る</a>
+  </div>
+  <script>
+    (function () {
+      function innerWidth(box) {
+        var s = getComputedStyle(box);
+        return box.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
+      }
+      function overflow(table, limit) {
+        table.offsetWidth;
+        return table.offsetWidth > limit + 1;
+      }
+      function fit() {
+        document.querySelectorAll(".block .cui").forEach(function (table) {
+          var limit = innerWidth(table.parentElement);
+          table.style.setProperty("--cell-min", "25ch");
+          if (overflow(table, limit)) {
+            table.style.setProperty("--cell-min", "15ch");
+          }
+          if (overflow(table, limit)) {
+            table.style.setProperty("--cell-min", "0px");
+          }
+        });
+      }
+      window.addEventListener("load", fit);
+      window.addEventListener("resize", fit);
+    })();
+  </script>
+</body>
+</html>
