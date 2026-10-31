@@ -132,6 +132,22 @@
       font-weight: 500;
     }
 
+    .shot {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 14px 0;
+      border: 1px solid #bbb;
+    }
+
+    .image-caption {
+      margin: 0 0 12px;
+      color: #666;
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
     .desc { margin: 0; color: #222; }
 
     @media (max-width: 560px) {
@@ -167,7 +183,8 @@
             </ul>
           </li>
         </ul>
-        <p class="no-image">画像はまだありません</p>
+        <img class="shot" src="re-query.png" alt="re-query の画面">
+        <p class="image-caption"><span class="image-caption-label">データをフォーマットにドラッグして登録します。登録した関係を保存しておけば他のデータでも読みだして使えます。</span><span class="image-caption-text"></span></p>
         <p class="desc">エクセル内のデータを、別のエクセル形式へ書き写すソフトです。左に開いたデータのファイルを、右のフォーマットファイルに書き込んで保存します。書き込み方法を保存しておけば、データを読み込んでボタンを押すだけで同じ方法でフォーマットに書き込みします。</p>
       </div>
     </details>
@@ -189,7 +206,8 @@
             </ul>
           </li>
         </ul>
-        <p class="no-image">画像はまだありません</p>
+        <img class="shot" src="sch_chk.png" alt="schedule_checker の画面">
+        <p class="image-caption"><span class="image-caption-label">たぶん、感覚で使えます。</span><span class="image-caption-text"></span></p>
         <p class="desc">スケジュールの可視化アプリです。線をクリックで工数も可視化できます。エクセルでできたガントとしても出力可能です。編集ファイルのデータをエクセルのデータファイルとして出力可能。データの書かれたエクセル側を編集して読み込むことも可能です。あくまで会議する人たちのための可視化用で、予定を立てるのはこんなの使わずに現場の人たちが考えたほうが早いです。</p>
       </div>
     </details>
@@ -211,8 +229,9 @@
             </ul>
           </li>
         </ul>
-        <p class="no-image">画像はまだありません</p>
-        <p class="desc">カメラ映像、または画像ファイルの指定範囲を PaddleOCR で読み取るソフトです。インターバル読込も可能。結果を CSV に追記します。パラメーターは適当に弄って遊んでください。</p>
+        <img class="shot" src="cam.png" alt="ocr_from_cam の画面">
+        <p class="image-caption"><span class="image-caption-label">カメラを設定→読み込む範囲を設定→読み込み（インターバルで定期読込もできます）</span><span class="image-caption-text"></span></p>
+        <p class="desc">カメラ映像、または画像ファイルの指定範囲を PaddleOCR で読み取るソフトです。インターバル読込も可能。結果を CSV に追記します。読み込みパラメーターは適当に弄って遊んでください。<b>500Mあります!!</b></p>
       </div>
     </details>
   </div>
