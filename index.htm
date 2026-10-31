@@ -1,13 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>kamishivy</title>
+  <title>meatprox｜Excel・現場・教育向けの無料ソフト</title>
+  <meta name="description" content="Excel の書き写し、工数の見える化、教育や作業の画面づくり、カメラ文字読み取り。事務、工場、学校で使える無料ソフトです。">
+  <meta name="keywords" content="Excel, エクセル, 自動化, ローコード, ノーコード, 事務, 業務効率化, 転記, データ変換, 工場, 製造, 現場, 工数, 工程, 教育, 教育現場, 授業, 教材, 大学, 学業, 研修, 作業支援, 記録, 手順書, チェックリスト, OCR, 文字認識, 無料ソフト, Python">
   <link rel="icon" href="images/icon.png">
   <style>
-    :root {
-      --blue: #5151FF;
-      --cream: #FAFDCC;
-      --ink: #1a1a4d;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      background: #fff;
+      color: #111;
+      line-height: 1.75;
     }
 
-メインページは作成中
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 22px 72px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      color: #111;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-align: left;
+    }
+
+    .caption {
+      margin: 0 0 4px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      color: #666;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.5;
+    }
+
+    p.caption:last-of-type {
+      margin-bottom: 22px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #111;
+      color: #c40000;
+    }
+
+    .soft,
+    details.entry {
+      display: block;
+      margin: 0;
+      border: 0;
+      border-bottom: 1px solid #111;
+      background: #fff;
+      color: #111;
+    }
+
+    .soft { border-top: 1px solid #111; }
+
+    .soft {
+      padding: 15px 2px;
+      font-size: 1.12rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.4;
+      text-decoration: none;
+      color: #111;
+    }
+
+    .soft:hover { background: #f3f3f3; }
+
+    .cue {
+      margin-left: 0.8em;
+      color: #666;
+      font-size: 0.72em;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    .blurb {
+      display: block;
+      margin-top: 2px;
+      color: #666;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.45;
+    }
+
+    details.entry > summary {
+      padding: 15px 2px;
+      font-size: 1.12rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.4;
+      cursor: pointer;
+      color: #111;
+    }
+
+    details.entry > summary:hover { background: #f3f3f3; }
+
+    .panel { padding: 2px 2px 18px; }
+
+    .tree {
+      margin: 0;
+      padding-left: 1.15em;
+      color: #222;
+    }
+
+    .tree ul { margin: 4px 0 0; padding-left: 1.15em; }
+    .tree li { margin: 3px 0; }
+    .tree a {
+      color: #111;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .no-image {
+      border: 1px solid #bbb;
+      margin: 14px 0;
+      padding: 28px 12px;
+      text-align: center;
+      color: #666;
+      background: #fafafa;
+      font-weight: 500;
+    }
+
+    .desc { margin: 0; color: #222; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 28px 16px 56px; }
+      h1 { letter-spacing: 0.18em; }
+      .soft,
+      details.entry > summary { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>ソフト</h1>
+    <p class="caption">実験補助、事務作業、工場管理、などに役立つソフトと、ゲーム動画関係のフリーソフトを作成しています。</p>
+    <p class="caption">リンク先のGITHUBのページのキューブマークのZIPからダウンロードできます。すべてフリーソフトです。最新版を選んでください。</p>
+
+    <a class="soft" href="https://meatprox.github.io/homepage/kamishivy_index.html">kamishivy<span class="cue">専用ページ</span><span class="blurb">kamishivy：次へボタンで表示を切り替えるアプリ</span></a>
+
+    <details class="entry">
+      <summary>re-query<span class="blurb">re-query：エクセルのデータをフォーマットに書き写すアプリ</span></summary>
+      <div class="panel">
+        <ul class="tree">
+          <li>
+            <a href="https://github.com/meatprox/re-query" target="_blank" rel="noopener noreferrer">re-query</a>
+            <ul>
+              <li>
+                Ver0.9.0
+                <ul>
+                  <li><a href="https://github.com/meatprox/re-query/tree/main/re-query_Ver0.9.0" target="_blank" rel="noopener noreferrer">フォルダ</a></li>
+                  <li><a href="https://github.com/meatprox/re-query/releases/tag/re-query_Ver0.9.0" target="_blank" rel="noopener noreferrer">リリース</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p class="no-image">画像はまだありません</p>
+        <p class="desc">エクセル内のデータを、別のエクセル形式へ書き写すソフトです。左に開いたデータのファイルを、右のフォーマットファイルに書き込んで保存します。書き込み方法を保存しておけば、データを読み込んでボタンを押すだけで同じ方法でフォーマットに書き込みします。</p>
+      </div>
+    </details>
+
+    <details class="entry">
+      <summary>schedule_checker<span class="blurb">schedule_checker：スケジュール見える化、ガントチャートアプリ</span></summary>
+      <div class="panel">
+        <ul class="tree">
+          <li>
+            <a href="https://github.com/meatprox/schedule_checker" target="_blank" rel="noopener noreferrer">schedule_checker</a>
+            <ul>
+              <li>
+                Ver1.1.0
+                <ul>
+                  <li><a href="https://github.com/meatprox/schedule_checker/tree/main/schedule_checker_Ver1.1.0_Python%E7%89%88" target="_blank" rel="noopener noreferrer">フォルダ schedule_checker_Ver1.1.0_Python版</a></li>
+                  <li><a href="https://github.com/meatprox/schedule_checker/releases/tag/Ver1.1.0" target="_blank" rel="noopener noreferrer">リリース</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p class="no-image">画像はまだありません</p>
+        <p class="desc">スケジュールの可視化アプリです。線をクリックで工数も可視化できます。エクセルでできたガントとしても出力可能です。編集ファイルのデータをエクセルのデータファイルとして出力可能。データの書かれたエクセル側を編集して読み込むことも可能です。あくまで会議する人たちのための可視化用で、予定を立てるのはこんなの使わずに現場の人たちが考えたほうが早いです。</p>
+      </div>
+    </details>
+
+    <details class="entry">
+      <summary>ocr_from_cam<span class="blurb">ocr_from_cam：カメラから文字を読めるかもしれないアプリ</span></summary>
+      <div class="panel">
+        <ul class="tree">
+          <li>
+            <a href="https://github.com/meatprox/ocr_from_cam" target="_blank" rel="noopener noreferrer">ocr_from_cam</a>
+            <ul>
+              <li>
+                ver1.0.0
+                <ul>
+                  <li><a href="https://github.com/meatprox/ocr_from_cam/blob/main/ocr_from_cam_ver1.0.py" target="_blank" rel="noopener noreferrer">ソース ocr_from_cam_ver1.0.py</a></li>
+                  <li><a href="https://github.com/meatprox/ocr_from_cam/releases/tag/ver1.0.0" target="_blank" rel="noopener noreferrer">リリース</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p class="no-image">画像はまだありません</p>
+        <p class="desc">カメラ映像、または画像ファイルの指定範囲を PaddleOCR で読み取るソフトです。インターバル読込も可能。結果を CSV に追記します。パラメーターは適当に弄って遊んでください。</p>
+      </div>
+    </details>
+  </div>
+</body>
+</html>
